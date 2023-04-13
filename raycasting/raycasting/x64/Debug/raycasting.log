@@ -1,2 +1,12 @@
-﻿  Game.cpp
+﻿  Player.cpp
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Player.cpp(18,98): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Player.cpp(18,48): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
   raycasting.vcxproj -> C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\x64\Debug\raycasting.exe

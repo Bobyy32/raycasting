@@ -7,10 +7,12 @@ void Game::initializeVariables()
 
 void Game::initializeWindow()
 {
-	this->videoMode.height = 600;
-	this->videoMode.width = 800;
+	this->videoMode.height = WINDOW_HEIGHT;
+	this->videoMode.width = WINDOW_WIDTH;
 
 	this->window = new sf::RenderWindow(this->videoMode, "Raycasting");
+
+	this->window->setFramerateLimit(60);
 }
 
 Game::Game()
@@ -52,7 +54,26 @@ void Game::updatePollEvents()
 //Funcitons
 void Game::update()
 {
+	/*
+			-Updates the poll events
+					-Updates the player
+							-Updates the collision
+									-Updates the window
+										*/
+
+	float simTime = clock.getElapsedTime().asSeconds();
+
+	deltaTime = simTime - lastFrameTime;
+
+	lastFrameTime = simTime;
+
+
 	updatePollEvents();
+
+	player.update(deltaTime);
+
+	std::cout << player.getPos().x << " " << player.getPos().y << std::endl;
+	
 }
 
 void Game::render()
@@ -66,9 +87,36 @@ void Game::render()
 
 	this->window->clear();
 
-	//Draw game objects
+	//Draw game 
 
-	/*this->window->draw(sf::CircleShape(),);*/
+	player.draw(*this->window);
+
+	drawMap();
+
 
 	this->window->display();
+
+}
+
+void Game::drawMap()
+{
+	sf::Vector2u windowSize = this->window->getSize();
+	float squareSize = static_cast<float>(std::min(windowSize.x, windowSize.y)) / 24.0f;
+
+	for (int i = 0; i < 24; i++)
+	{
+		for (int j = 0; j < 24; j++)
+		{
+			if (worldMap[i][j] != 0)
+			{
+				sf::RectangleShape wall;
+				wall.setSize(sf::Vector2f(squareSize, squareSize));
+				wall.setFillColor(sf::Color::Red);
+				wall.setOutlineColor(sf::Color::White);
+				wall.setOutlineThickness(1);
+				wall.setPosition(sf::Vector2f(j * squareSize, i * squareSize));
+				this->window->draw(wall);
+			}
+		}
+	}
 }
