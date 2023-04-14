@@ -8,18 +8,17 @@
 #include "SFML/Network.hpp"
 
 #include <iostream>
+#include <math.h>
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
 
+#define MAP_WIDTH 24
+#define MAP_HEIGHT 24
+
+
+
 #define PI 3.14159265
-
-
-typedef struct position
-{
-	float x, y, dx, dy;
-}Position;
-
 
 
 #endif

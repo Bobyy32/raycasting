@@ -72,7 +72,7 @@ void Game::update()
 
 	player.update(deltaTime);
 
-	std::cout << player.getPos().x << " " << player.getPos().y << std::endl;
+	std::cout << player.getX() << " " << player.getY() << std::endl;
 	
 }
 

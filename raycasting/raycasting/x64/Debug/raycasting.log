@@ -1,15 +1,20 @@
 ﻿  Game.cpp
   Player.cpp
-C:\Users\Elang\Documents\GitHub\raycasting\raycasting\raycasting\Player.cpp(18,98): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Player.cpp(19,19): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Player.cpp(27,19): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Player.cpp(32,29): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Player.cpp(33,29): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Player.cpp(36,98): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Elang\Documents\GitHub\raycasting\raycasting\raycasting\Player.cpp(18,48): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Player.cpp(36,48): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
+  Raycast.cpp
   Source.cpp
   Generating Code...
-  raycasting.vcxproj -> C:\Users\Elang\Documents\GitHub\raycasting\raycasting\x64\Debug\raycasting.exe
+  raycasting.vcxproj -> C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\x64\Debug\raycasting.exe
