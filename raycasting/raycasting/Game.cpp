@@ -3,6 +3,7 @@
 void Game::initializeVariables()
 {
 	this->window = nullptr;
+
 }
 
 void Game::initializeWindow()
@@ -56,10 +57,10 @@ void Game::update()
 {
 	/*
 			-Updates the poll events
-					-Updates the player
-							-Updates the collision
-									-Updates the window
-										*/
+			-Updates the player
+			-Updates the collision (not implemented yet)
+			-Updates the window
+	*/
 
 	float simTime = clock.getElapsedTime().asSeconds();
 
@@ -72,7 +73,7 @@ void Game::update()
 
 	player.update(deltaTime);
 
-	std::cout << player.getX() << " " << player.getY() << std::endl;
+	/*raycast.raycast(player);*/
 	
 }
 
@@ -91,17 +92,23 @@ void Game::render()
 
 	player.draw(*this->window);
 
+	std::vector<sf::Vector2f> intersections = raycast.raycast(player, 360, FOV);
+	raycast.drawRays(*window, sf::Vector2f(player.getX(), player.getY()), intersections);
+
 	drawMap();
+
 
 
 	this->window->display();
 
 }
 
+
+//draws map onto screen
 void Game::drawMap()
 {
 	sf::Vector2u windowSize = this->window->getSize();
-	float squareSize = static_cast<float>(std::min(windowSize.x, windowSize.y)) / 24.0f;
+	float squareSize = TILE_SIZE;
 
 	for (int i = 0; i < 24; i++)
 	{

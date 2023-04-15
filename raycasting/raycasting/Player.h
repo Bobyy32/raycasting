@@ -4,7 +4,7 @@
 class Player
 {
 private:
-	sf::RectangleShape shape;
+	sf::CircleShape shape;
 
 	//position
 	float x = 400;
@@ -17,13 +17,13 @@ private:
 	float dx = 0;
 	float dy = 0;
 
-
 public:
 	Player();
 	
 	void update(float d_Time); //delta time
 	void draw(sf::RenderTarget& target);
 
+	/*bool checkCollision(int x, int y, const int worldMap[][MAP_WIDTH]);*/
 
 	//getters
 	float getX()const { return this->x; }
@@ -31,6 +31,5 @@ public:
 	float getAngle()const { return this->angle; }
 	float getDX()const { return this->dx; }
 	float getDY()const { return this->dy; }
-
 };
 

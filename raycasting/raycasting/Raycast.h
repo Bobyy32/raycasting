@@ -5,20 +5,21 @@
 
 class Raycast
 {
+
 private:
-	Player player;
-
-	float rayX = 0;
-	float rayY = 0;
-	float xOffset = 0;
-	float yOffset = 0;
-
-	float rayAngle = 0;
-
 
 public:
-	Raycast(Player lplayer): player(lplayer), rayAngle(player.getAngle()){}
-	void DrawRays();
+	/*sf::Vector2f raycast(Player player);
+	void drawRay(sf::RenderWindow& window, const sf::Vector2f& playerPos, const sf::Vector2f& intersection);*/
+	float wrap(float angle) {
+		while (angle >= 360.f) angle -= 360.f;
+		while (angle < 0.f) angle += 360.f;
+		return angle;
+	}
+
+	std::vector<sf::Vector2f> raycast(Player player, int numRays, float fov);
+	void drawRays(sf::RenderWindow& window, const sf::Vector2f& playerPos, const std::vector<sf::Vector2f>& intersections);
+
 
 };
 
