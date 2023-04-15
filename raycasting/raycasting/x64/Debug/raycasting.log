@@ -1,2 +1,9 @@
 ﻿  Game.cpp
+  Player.cpp
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Player.cpp(95,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Player.cpp(99,44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Raycast.cpp
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Raycast.cpp(224,43): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Source.cpp
+  Generating Code...
   raycasting.vcxproj -> C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\x64\Debug\raycasting.exe

@@ -212,25 +212,28 @@
 //}
 
 
-std::vector<sf::Vector2f> Raycast::raycast(Player player, int numRays, float fov)
+std::vector<sf::Vector2f> Raycast::raycast(Player player)
 {
+ 	//credit: https://www.youtube.com/watch?v=gYRrGTC7GtA&t=424s (code inspired from this video since im not good at math!)
+    //credit::: https://lodev.org/cgtutor/raycasting.html explanation behind raycasting
+
+    int numRays = WINDOW_WIDTH;
     std::vector<sf::Vector2f> intersections;
-    float angleStep = fov / (numRays - 1);
-    float startAngle = player.getAngle() - fov / 2.0f;
+
+    // Convert FOV to radians and wrap the angle in radians
+    float radiansFOV = (FOV * PI) / 180.0f;
+    float rayAngle = player.getAngle() - radiansFOV / 2;
 
     for (int i = 0; i < numRays; i++)
     {
-        float currentAngle = startAngle + i * angleStep;
+
         float stepSize = 1.0f;
         float maxDistance = 1000.0f;
         sf::Vector2f currentPosition = sf::Vector2f(player.getX(), player.getY());
 
         for (float currentDistance = stepSize; currentDistance < maxDistance; currentDistance += stepSize)
         {
-            sf::Vector2f intersection(
-                currentPosition.x + currentDistance * -cos(currentAngle),
-                currentPosition.y + currentDistance * -sin(currentAngle)
-            );
+            sf::Vector2f intersection(currentPosition.x + currentDistance * -cos(rayAngle), currentPosition.y + currentDistance * -sin(rayAngle));
 
             int mapX = static_cast<int>(intersection.x / TILE_SIZE);
             int mapY = static_cast<int>(intersection.y / TILE_SIZE);
@@ -248,10 +251,17 @@ std::vector<sf::Vector2f> Raycast::raycast(Player player, int numRays, float fov
                 break; // Out of the map bounds
             }
         }
+
+        // Increment ray angle by the angular step in radians
+        float angularStep = radiansFOV / (numRays - 1);
+        rayAngle += angularStep;
     }
 
     return intersections;
 }
+
+
+
 
 void Raycast::drawRays(sf::RenderWindow& window, const sf::Vector2f& playerPos, const std::vector<sf::Vector2f>& intersections)
 {

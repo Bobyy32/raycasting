@@ -9,13 +9,14 @@
 
 #include <iostream>
 #include <vector>
+#include <cmath>
 #include <math.h>
 
 //window resolution
-#define WINDOW_WIDTH 1280
+#define WINDOW_WIDTH 1280	//also going to be the amount of rays we will be casting
 #define WINDOW_HEIGHT 720
 
-#define FOV 60
+#define FOV 66 //FOV is 2 * atan(0.66/1.0)=66°
 
 //map size
 #define MAP_WIDTH 24
@@ -24,6 +25,8 @@
 
 //you should know what this is by now
 #define PI 3.14159265
+#define RAD_TO_DEG  180.0f / PI
+#define DEG_TO_RAD PI / 180.0f
 
 
 static int worldMap[MAP_HEIGHT][MAP_WIDTH] =
