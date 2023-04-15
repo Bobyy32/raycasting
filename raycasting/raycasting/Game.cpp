@@ -92,7 +92,7 @@ void Game::render()
 
 	player.draw(*this->window);
 
-	std::vector<sf::Vector2f> intersections = raycast.raycast(player, 360, FOV);
+	std::vector<sf::Vector2f> intersections = raycast.raycast(player);
 	raycast.drawRays(*window, sf::Vector2f(player.getX(), player.getY()), intersections);
 
 	drawMap();
