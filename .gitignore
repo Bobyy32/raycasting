@@ -396,3 +396,26 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+*.tlog
+*.pdb
+*.idb
+raycasting/raycasting/x64/Debug/raycasting.tlog/link.write.1.tlog
+*.lastbuildstate
+*.log
+raycasting/raycasting/x64/Debug/raycasting.log
+raycasting/raycasting/x64/Debug/raycasting.ilk
+raycasting/raycasting/x64/Debug/raycasting.exe.recipe
+raycasting/raycasting/x64/Debug/Player.obj
+raycasting/raycasting/x64/Debug/Game.obj
+raycasting/raycasting/x64/Debug/vc143.pdb
+*.pdb
+*.idb
+*.db
+*.tlog
+*.lastbuildstate
+*.ilk
+*.recipe
+*.obj
+*.obj
+*.db
+raycasting/.vs/raycasting/v17/.suo
