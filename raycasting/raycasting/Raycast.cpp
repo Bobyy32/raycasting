@@ -69,8 +69,8 @@ void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const std::
     /*int screenWidth = 800;
     int screenHeight = 600;*/
 
-    sf::Color brightColor = sf::Color::Red;
-    sf::Color darkColor = sf::Color(128, 0, 0); // Dark red
+    sf::Color brightColor = sf::Color::White;
+    sf::Color darkColor = sf::Color(0,0,0); // Dark red
 
     for (int i = 0; i < intersections.size(); i++)
     {
