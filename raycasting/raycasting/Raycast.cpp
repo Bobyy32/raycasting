@@ -274,4 +274,40 @@ void Raycast::drawRays(sf::RenderWindow& window, const sf::Vector2f& playerPos, 
 		line[1].color = sf::Color::White;
 		window.draw(line);
 	}
+<<<<<<< Updated upstream
 }
+=======
+}
+
+void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const std::vector<sf::Vector2f>& intersections)
+{
+    sf::RectangleShape line;
+    float viewAngle = player.getAngle();
+    float fov = (FOV * PI) / 180.0f; // Convert FOV to radians
+    /*int screenWidth = 800;
+    int screenHeight = 600;*/
+
+    sf::Color brightColor = sf::Color::White;
+    sf::Color darkColor = sf::Color(0,0,0); //dim grey
+
+    for (int i = 0; i < intersections.size(); i++)
+    {
+        float rayAngle = viewAngle - (fov / 2) + (i * fov / (intersections.size() - 1));
+        float distance = std::sqrt(std::pow(player.getX() - intersections[i].x, 2) + std::pow(player.getY() - intersections[i].y, 2));
+
+        // Fish eye effect fix (IMPORTANT)
+        float correctedDistance = distance * cos(viewAngle - rayAngle);
+        float lineHeight = (WINDOW_HEIGHT / correctedDistance) * 100;
+
+        // Shading based on distance
+        float shadingFactor = correctedDistance / 1000.0f;
+        sf::Color shadedColor = sf::Color(brightColor.r + shadingFactor * (darkColor.r - brightColor.r),brightColor.g + shadingFactor * (darkColor.g - brightColor.g), brightColor.b + shadingFactor * (darkColor.b - brightColor.b));
+
+        line.setSize(sf::Vector2f(1, lineHeight));
+        line.setPosition(sf::Vector2f(i, (WINDOW_HEIGHT / 2) - (lineHeight / 2)));
+        line.setFillColor(shadedColor);
+        window.draw(line);
+    }
+}
+
+>>>>>>> Stashed changes

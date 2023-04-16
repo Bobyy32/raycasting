@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ﻿  Game.cpp
   Player.cpp
 C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Player.cpp(95,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
@@ -6,4 +7,16 @@ C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Player
 C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Raycast.cpp(224,43): warning C4305: 'initializing': truncation from 'double' to 'float'
   Source.cpp
   Generating Code...
+=======
+﻿  Raycast.cpp
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Raycast.cpp(78,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Raycast.cpp(89,27): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Raycast.cpp(88,27): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Raycast.cpp(87,27): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
+C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\raycasting\Raycast.cpp(93,39): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+>>>>>>> Stashed changes
   raycasting.vcxproj -> C:\Users\ees10\OneDrive\Documents\GitHub\raycasting\raycasting\x64\Debug\raycasting.exe

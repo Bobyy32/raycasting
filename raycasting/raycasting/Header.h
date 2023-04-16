@@ -16,7 +16,13 @@
 #define WINDOW_WIDTH 1280	//also going to be the amount of rays we will be casting
 #define WINDOW_HEIGHT 720
 
+<<<<<<< Updated upstream
 #define FOV 66 //FOV is 2 * atan(0.66/1.0)=66°
+=======
+#define FPS 60
+
+#define FOV 66 //FOV is 2 * atan(0.66/1.0)=66°	(if you feel like breaking your computer change it to 360 lol)
+>>>>>>> Stashed changes
 
 //map size
 #define MAP_WIDTH 24
