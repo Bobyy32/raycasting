@@ -13,7 +13,7 @@ void Game::initializeWindow()
 
 	this->window = new sf::RenderWindow(this->videoMode, "Raycasting");
 
-	this->window->setFramerateLimit(60);
+	this->window->setFramerateLimit(FPS);
 }
 
 Game::Game()
@@ -90,14 +90,13 @@ void Game::render()
 
 	//Draw game 
 
-	player.draw(*this->window);
+	/*player.draw(*this->window);*/
 
 	std::vector<sf::Vector2f> intersections = raycast.raycast(player);
-	raycast.drawRays(*window, sf::Vector2f(player.getX(), player.getY()), intersections);
+	raycast.draw3D(*window, player, intersections);
+	/*raycast.drawRays(*window, sf::Vector2f(player.getX(), player.getY()), intersections);*/
 
-	drawMap();
-
-
+	/*drawMap();*/
 
 	this->window->display();
 
@@ -108,7 +107,7 @@ void Game::render()
 void Game::drawMap()
 {
 	sf::Vector2u windowSize = this->window->getSize();
-	float squareSize = TILE_SIZE;
+	
 
 	for (int i = 0; i < 24; i++)
 	{
@@ -117,11 +116,11 @@ void Game::drawMap()
 			if (worldMap[i][j] != 0)
 			{
 				sf::RectangleShape wall;
-				wall.setSize(sf::Vector2f(squareSize, squareSize));
+				wall.setSize(sf::Vector2f(TILE_SIZE, TILE_SIZE));
 				wall.setFillColor(sf::Color::Red);
 				wall.setOutlineColor(sf::Color::White);
 				wall.setOutlineThickness(1);
-				wall.setPosition(sf::Vector2f(j * squareSize, i * squareSize));
+				wall.setPosition(sf::Vector2f(j * TILE_SIZE, i * TILE_SIZE));
 				this->window->draw(wall);
 			}
 		}

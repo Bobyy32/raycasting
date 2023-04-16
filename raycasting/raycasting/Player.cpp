@@ -8,94 +8,51 @@ float wrap(float angle) {
 
 Player::Player()
 {
-    // Initialize player object to a circle shape with radius 7.5 (approx. same size as 15x15 rectangle) and color green
-    this->shape.setRadius(7.5f);
-    this->shape.setFillColor(sf::Color::Green);
 
-    // Set origin to the center of the shape and set position to 400x300 on the window
-    this->shape.setOrigin(sf::Vector2f(7.5f, 7.5f));
-    this->shape.setPosition(sf::Vector2f(x, y));
+
+    float radius = TILE_SIZE * 0.20f;
+    shape.setRadius(radius);
+
+    // Set origin to the center of the shape
+    shape.setOrigin(sf::Vector2f(radius, radius));
+
+    // Find a valid spawn position within the map boundaries
+    int spawnX = 0;
+    int spawnY = 0;
+    bool spawnFound = false;
+    for (int y = 0; y < MAP_HEIGHT; y++) {
+        for (int x = 0; x < MAP_WIDTH; x++) {
+            if (worldMap[y][x] == 0) {
+                spawnX = x;
+                spawnY = y;
+                spawnFound = true;
+                break;
+            }
+        }
+        if (spawnFound) {
+            break;
+        }
+    }
+
+    // Set position based on the spawn position
+    if (spawnFound) {
+        shape.setPosition(sf::Vector2f(spawnX/ 2, spawnY/ 2));
+    }
+    else {
+        // If no valid spawn position found, set position to the top-left corner of the map
+        shape.setPosition(sf::Vector2f(TILE_SIZE / 2, TILE_SIZE / 2));
+    }
+
+    // Set the color of the player
+    shape.setFillColor(sf::Color::Green);
 }
-
-//void Player::update(float d_Time)
-//{
-//    float rotation = this->shape.getRotation();
-//
-//    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-//        float rotationSpeed = (sf::Keyboard::isKeyPressed(sf::Keyboard::A) ? -250.f : 250.f) * d_Time;
-//        this->shape.rotate(rotationSpeed);
-//
-//        rotation = wrap(rotation);
-//        angle = rotation * DEG_TO_RAD;
-//    }
-//
-//    // Update direction line based on the shape's rotation
-//    dx = -cos(angle) * 5;
-//    dy = -sin(angle) * 5;
-//
-//    //object rotation
-//    sf::Vector2f direction = sf::Vector2f(std::cos(rotation * DEG_TO_RAD), std::sin(rotation * DEG_TO_RAD));
-//    float speed = 250.f;
-//
-//
-//    //object move forward and backward
-//    float newX = x, newY = y;
-//    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-//    {
-//        newX += dx;
-//        newY += dy;
-//    }
-//    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-//    {
-//        newX -= dx;
-//        newY -= dy;
-//    }
-//
-//    // Calculate the corner positions for collision checks
-//    float radius = this->shape.getRadius();
-//    float margin = 0.5 * TILE_SIZE;
-//    //Thanks to https://stackoverflow.com/questions/401847/circle-rectangle-collision-detection-intersection
-//    //And to my friend brayden at Virginia Tech lol
-//    float cornerX[4] = { newX - radius + margin, newX + radius - margin, newX + radius - margin, newX - radius + margin };
-//    float cornerY[4] = { newY - radius + margin, newY - radius + margin, newY + radius - margin, newY + radius - margin };
-//
-//    bool collision = false;
-//
-//    // Check for collision with walls
-//    for (int i = 0; i < 4; i++) {
-//        int mapX = static_cast<int>(cornerX[i] / TILE_SIZE);
-//        int mapY = static_cast<int>(cornerY[i] / TILE_SIZE);
-//
-//        // Check if the corner is within the map bounds
-//        if (mapX >= 0 && mapX < MAP_WIDTH && mapY >= 0 && mapY < MAP_HEIGHT)
-//        {
-//            // If the tile at the corner position is a wall, set collision flag to true
-//            if (worldMap[mapY][mapX] != 0)
-//            {
-//                collision = true;
-//                break;
-//            }
-//        }
-//    }
-//
-//    if (!collision)
-//    {
-//        x = newX;
-//        y = newY;
-//        this->shape.setPosition(sf::Vector2f(x, y));
-//    }
-//
-//    // Update position
-//    x = this->shape.getPosition().x;
-//    y = this->shape.getPosition().y;
-//}
 
 void Player::update(float d_Time)
 {
     float rotation = this->shape.getRotation() * DEG_TO_RAD; // Convert the initial rotation to radians
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        float rotationSpeed = (sf::Keyboard::isKeyPressed(sf::Keyboard::A) ? -5.f : 5.f) * d_Time;
+        float rotationSpeed = (sf::Keyboard::isKeyPressed(sf::Keyboard::A) ? -2.f : 2.f) * d_Time;
         this->shape.rotate(rotationSpeed * RAD_TO_DEG); // Convert rotation speed to degrees for SFML
 
         rotation = wrap(rotation);
@@ -108,26 +65,31 @@ void Player::update(float d_Time)
 
     //object rotation
     sf::Vector2f direction = sf::Vector2f(std::cos(rotation), std::sin(rotation));
-    float speed = 250.f;
 
-    //collision detection
 
     //object move forward and backward
     float newX = x, newY = y;
+    float referenceTileSize = (float)TILE_SIZE; // Set your reference TILE_SIZE here
+    float referenceSpeed = 0.2f; // Set your reference speed here
+    float tileSizeRatio = TILE_SIZE / referenceTileSize;
+    float speedFactor = referenceSpeed * tileSizeRatio;
+    //FAILED attempt at scaling speed to tile size guess ill just keep it here
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
-        newX += dx;
-        newY += dy;
+        newX += speedFactor * dx;
+        newY += speedFactor * dy;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        newX -= dx;
-        newY -= dy;
+        newX -= speedFactor * dx;
+        newY -= speedFactor * dy;
     }
 
+    //collision detection
     // Calculate the corner positions for collision checks
     float radius = this->shape.getRadius();
     float margin = 0.5 * TILE_SIZE;
+
     //Thanks to https://stackoverflow.com/questions/401847/circle-rectangle-collision-detection-intersection
    //And to my friend brayden at Virginia Tech lol
     float cornerX[4] = { newX - radius + margin, newX + radius - margin, newX + radius - margin, newX - radius + margin };
@@ -135,29 +97,51 @@ void Player::update(float d_Time)
 
     bool collision = false;
 
-    // Check for collision with walls
+    // Check for collision with walls in X direction
+    bool collisionX = false;
     for (int i = 0; i < 4; i++) {
         int mapX = static_cast<int>(cornerX[i] / TILE_SIZE);
         int mapY = static_cast<int>(cornerY[i] / TILE_SIZE);
 
-        // Check if the corner is within the map bounds
         if (mapX >= 0 && mapX < MAP_WIDTH && mapY >= 0 && mapY < MAP_HEIGHT)
         {
-            // If the tile at the corner position is a wall, set collision flag to true
             if (worldMap[mapY][mapX] != 0)
             {
-                collision = true;
+                collisionX = true;
                 break;
             }
         }
     }
 
-    if (!collision)
+    // Update X position if no collision in X direction
+    if (!collisionX)
     {
         x = newX;
-        y = newY;
-        this->shape.setPosition(sf::Vector2f(x, y));
     }
+
+    // Check for collision with walls in Y direction
+    bool collisionY = false;
+    for (int i = 0; i < 4; i++) {
+        int mapX = static_cast<int>(cornerX[i] / TILE_SIZE);
+        int mapY = static_cast<int>(cornerY[i] / TILE_SIZE);
+
+        if (mapX >= 0 && mapX < MAP_WIDTH && mapY >= 0 && mapY < MAP_HEIGHT)
+        {
+            if (worldMap[mapY][mapX] != 0)
+            {
+                collisionY = true;
+                break;
+            }
+        }
+    }
+
+    // Update Y position if no collision in Y direction
+    if (!collisionY)
+    {
+        y = newY;
+    }
+
+    this->shape.setPosition(sf::Vector2f(x, y));
 
     // Update position
     x = this->shape.getPosition().x;
