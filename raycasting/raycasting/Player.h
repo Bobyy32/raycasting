@@ -7,8 +7,15 @@ private:
 	sf::CircleShape shape;
 
 	//position
-	float x = 400;
-	float y = 400;
+	//this is to keep track of the position of the player
+	int spwnX = 5;
+	int spwnY = 5;
+
+	float x = static_cast<float>(spwnX * TILE_SIZE);
+	float y = static_cast<float>(spwnY * TILE_SIZE);
+
+	/*float x = 100;
+	float y = 100;*/
 
 	//angle
 	float angle = 0;

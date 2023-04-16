@@ -21,6 +21,7 @@ public:
 
 	std::vector<sf::Vector2f> raycast(Player player);
 	void drawRays(sf::RenderWindow& window, const sf::Vector2f& playerPos, const std::vector<sf::Vector2f>& intersections);
+	void draw3D(sf::RenderWindow& window, const Player& player, const std::vector<sf::Vector2f>& intersections);
 
 };
 
