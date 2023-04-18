@@ -49,10 +49,10 @@ Player::Player()
 
 void Player::update(float d_Time)
 {
-    float rotation = this->shape.getRotation() * DEG_TO_RAD; // Convert the initial rotation to radians
+    float rotation = this->shape.getRotation() * DEG_TO_RAD; // Convert the rotation to radians
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        float rotationSpeed = (sf::Keyboard::isKeyPressed(sf::Keyboard::A) ? -2.f : 2.f) * d_Time;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::J) || sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
+        float rotationSpeed = (sf::Keyboard::isKeyPressed(sf::Keyboard::J) ? -2.f : 2.f) * d_Time;
         this->shape.rotate(rotationSpeed * RAD_TO_DEG); // Convert rotation speed to degrees for SFML
 
         rotation = wrap(rotation);
@@ -69,8 +69,8 @@ void Player::update(float d_Time)
 
     //object move forward and backward
     float newX = x, newY = y;
-    float referenceTileSize = (float)TILE_SIZE; // Set your reference TILE_SIZE here
-    float referenceSpeed = 0.2f; // Set your reference speed here
+    float referenceTileSize = (float)TILE_SIZE;
+    float referenceSpeed = 0.5f; // reference speed
     float tileSizeRatio = TILE_SIZE / referenceTileSize;
     float speedFactor = referenceSpeed * tileSizeRatio;
     //FAILED attempt at scaling speed to tile size guess ill just keep it here
@@ -85,7 +85,26 @@ void Player::update(float d_Time)
         newY -= speedFactor * dy;
     }
 
-    //collision detection
+    //object move left and right
+    float perpendicularX = -direction.y;
+    float perpendicularY = direction.x;
+
+    float lateralSpeedFactor = speedFactor * 5.0f;  //fix for diagonal slow movement
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    {
+        newX += lateralSpeedFactor * perpendicularX;
+        newY += lateralSpeedFactor * perpendicularY;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    {
+        newX -= lateralSpeedFactor * perpendicularX;
+        newY -= lateralSpeedFactor * perpendicularY;
+    }
+
+    //collision detection (absolute dogshit i gotta fix this omg so annoying help)
+    // 
+    // 
     // Calculate the corner positions for collision checks
     float radius = this->shape.getRadius();
     float margin = 0.5 * TILE_SIZE;
@@ -149,7 +168,7 @@ void Player::update(float d_Time)
 }
 
 
-void Player::draw(sf::RenderTarget& target)
+void Player::draw(sf::RenderTarget& target)     //this is for drawing the player in a 2d space (testing before i added 3d)
 {
 	target.draw(this->shape);
 

@@ -9,8 +9,6 @@ class Raycast
 private:
 
 public:
-	/*sf::Vector2f raycast(Player player);
-	void drawRay(sf::RenderWindow& window, const sf::Vector2f& playerPos, const sf::Vector2f& intersection);*/
 
 	float wrap(float angle) //useless code
 	{
@@ -19,9 +17,13 @@ public:
 		return angle;
 	}
 
-	std::vector<sf::Vector2f> raycast(Player player);
+	//std::vector<sf::Vector2f> raycast(Player player);
+	std::vector<std::pair<sf::Vector2f, bool>> raycast(Player player);	//reason for change is to maybe add a bool to the vector to see if the ray hit a wall or not
+
 	void drawRays(sf::RenderWindow& window, const sf::Vector2f& playerPos, const std::vector<sf::Vector2f>& intersections);
-	void draw3D(sf::RenderWindow& window, const Player& player, const std::vector<sf::Vector2f>& intersections);
+
+
+	void draw3D(sf::RenderWindow& window, const Player& player, const std::vector<std::pair<sf::Vector2f, bool>>& intersections);
 
 };
 

@@ -144,6 +144,19 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Raycast.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="texture\barrel.png" />
+    <Image Include="texture\bluestone.png" />
+    <Image Include="texture\colorstone.png" />
+    <Image Include="texture\eagle.png" />
+    <Image Include="texture\greenlight.png" />
+    <Image Include="texture\greystone.png" />
+    <Image Include="texture\mossy.png" />
+    <Image Include="texture\pillar.png" />
+    <Image Include="texture\purplestone.png" />
+    <Image Include="texture\redbrick.png" />
+    <Image Include="texture\wood.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
