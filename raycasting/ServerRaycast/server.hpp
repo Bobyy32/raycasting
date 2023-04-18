@@ -1,6 +1,6 @@
 #pragma once
 #include "bundler.hpp"
-#include "Network.hpp"
+#include "SFML/Network.hpp"
 
 struct sendData 
 {
@@ -55,7 +55,7 @@ public:
 
 		recvData recvBuf;
 		sendData sendBuf;
-
+		sf::TcpSocket sock;
 
 };
 

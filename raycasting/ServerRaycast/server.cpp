@@ -30,7 +30,12 @@ void server::start()
 	while (keepRunning)
 	{
 		//wait till tcp connection established
+		//sf::TcpListener listen;
+		//listen.listen(std::stoi(receivePort));
+		//
+		//listen.accept(sock);
 
+		//std::cout << "client connected: " << sock.getRemoteAddress() << " port: " << receivePort;
 
 
 		std::thread commandThread(&server::waitForCommand, this);
@@ -87,4 +92,8 @@ void server::waitForCommand()
 		}
 	}
 
+}
+
+void server::cleanUp()
+{
 }
