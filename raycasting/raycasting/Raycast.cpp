@@ -96,3 +96,37 @@ void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const std::
     }
 }
 
+void Raycast::drawMinimap(sf::RenderWindow& window, const Player& player, const std::vector<sf::Vector2f>& intersections)
+{
+	// Draw the map
+    for (int i = 0; i < MAP_HEIGHT; i++)
+    {
+        for (int j = 0; j < MAP_WIDTH; j++)
+        {
+			sf::RectangleShape tile;
+			tile.setSize(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+			tile.setPosition(sf::Vector2f(j * TILE_SIZE, i * TILE_SIZE));
+			tile.setFillColor(sf::Color::White);
+			tile.setOutlineColor(sf::Color::Black);
+			tile.setOutlineThickness(1);
+            if (worldMap[i][j] == 0)
+            {
+				tile.setFillColor(sf::Color::Black);
+			}
+			window.draw(tile);
+		}
+	}
+	// Draw the player
+	sf::CircleShape playerShape(5);
+	playerShape.setFillColor(sf::Color::Red);
+	playerShape.setPosition(sf::Vector2f(player.getX() - 5, player.getY() - 5));
+	window.draw(playerShape);
+	// Draw the rays
+    for (const sf::Vector2f& intersection : intersections)
+    {
+		sf::CircleShape rayShape(2);
+		rayShape.setFillColor(sf::Color::Red);
+		rayShape.setPosition(sf::Vector2f(intersection.x - 2, intersection.y - 2));
+		window.draw(rayShape);
+	}
+}
