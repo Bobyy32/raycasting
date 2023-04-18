@@ -1,5 +1,6 @@
 #pragma once
 #include "bundler.hpp"
+#include "SFML/System.hpp"
 #include "SFML/Network.hpp"
 
 struct sendData 

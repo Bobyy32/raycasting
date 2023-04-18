@@ -30,13 +30,13 @@ void server::start()
 	while (keepRunning)
 	{
 		//wait till tcp connection established
-		//sf::TcpListener listen;
-		//listen.listen(std::stoi(receivePort));
-		//
-		//listen.accept(sock);
+		sf::TcpListener listen;
+		listen.listen(std::stoi(receivePort));
+		
+		listen.accept(sock);
 
-		//std::cout << "client connected: " << sock.getRemoteAddress() << " port: " << receivePort;
-
+		std::cout << "client connected: " << sock.getRemoteAddress() << " port: " << receivePort;
+		connected = true;
 
 		std::thread commandThread(&server::waitForCommand, this);
 		std::thread sendThread(&server::send, this);
@@ -52,7 +52,24 @@ void server::receive()
 {
 	while (connected && keepRunning) 
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		
+		if (sendBuf.sendMsgFlag == false)
+		{
+			strcpy_s(sendBuf.sendMsg, "sendTest");
+			while (true) 
+			{
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
+			std::cout << "attempting to send msg "<< sendBuf.sendMsg << std::endl;
+
+			if (sock.send(sendBuf.sendMsg, sizeof(sendBuf.sendMsg)) == sf::Socket::Done) 
+			{
+				std::cout << "error in sending data\n";
+			}
+			sendBuf.sendMsgFlag = false;
+			}
+		}
+		
+		
 	}
 
 	return;
@@ -66,7 +83,7 @@ void server::send()
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 		if (sendBuf.sendMsgFlag == true) 
 		{
-		
+			//sock.receive();
 		}
 	}
 
