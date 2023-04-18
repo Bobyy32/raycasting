@@ -9,8 +9,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "raycastUnitTesting", "rayca
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerRaycast", "ServerRaycast\ServerRaycast.vcxproj", "{CBFEF97D-4200-44F5-8F28-F6AE85131373}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "coc", "coc\coc.vcxproj", "{33A03A38-B9A0-4C64-9CB4-6478098B765E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -43,14 +41,6 @@ Global
 		{CBFEF97D-4200-44F5-8F28-F6AE85131373}.Release|x64.Build.0 = Release|x64
 		{CBFEF97D-4200-44F5-8F28-F6AE85131373}.Release|x86.ActiveCfg = Release|Win32
 		{CBFEF97D-4200-44F5-8F28-F6AE85131373}.Release|x86.Build.0 = Release|Win32
-		{33A03A38-B9A0-4C64-9CB4-6478098B765E}.Debug|x64.ActiveCfg = Debug|x64
-		{33A03A38-B9A0-4C64-9CB4-6478098B765E}.Debug|x64.Build.0 = Debug|x64
-		{33A03A38-B9A0-4C64-9CB4-6478098B765E}.Debug|x86.ActiveCfg = Debug|Win32
-		{33A03A38-B9A0-4C64-9CB4-6478098B765E}.Debug|x86.Build.0 = Debug|Win32
-		{33A03A38-B9A0-4C64-9CB4-6478098B765E}.Release|x64.ActiveCfg = Release|x64
-		{33A03A38-B9A0-4C64-9CB4-6478098B765E}.Release|x64.Build.0 = Release|x64
-		{33A03A38-B9A0-4C64-9CB4-6478098B765E}.Release|x86.ActiveCfg = Release|Win32
-		{33A03A38-B9A0-4C64-9CB4-6478098B765E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
