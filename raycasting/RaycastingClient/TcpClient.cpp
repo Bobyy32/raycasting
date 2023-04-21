@@ -26,8 +26,18 @@ void TcpClient::start()
 	keepRunning = true;
 	while (connected && keepRunning)
 	{
-		sock.connect(serverIp, port);
-		
+		auto status = sock.connect(serverIp, port);
+
+		if (status == sf::Socket::Done) 
+		{
+			std::cout << "socket was correct\n";
+		}
+		else
+		{
+			std::cout << "socket had a issue\n";
+			continue;
+		}
+
 		std::thread SendThread(&TcpClient::receive, this);
 		std::thread ReceiveThread(&TcpClient::send, this);
 
