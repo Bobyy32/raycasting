@@ -25,8 +25,9 @@ namespace jvds
 	void txtPause(std::string text);
 	void clsTxtPause(std::string text);
 	//std::string getDateString();
+	bool doesStreamhaveChar(std::stringstream& ss, char delim);
 
-
+	void charArrtoStream(char arr[], int sizeArr, std::stringstream& ss);
 
 	//math stuff
 	int getRandomBetween(int lowRange, int highRange);

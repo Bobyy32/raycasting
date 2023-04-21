@@ -38,15 +38,19 @@ public:
 	//general functions
 	void start();
 
-	void receive();
-
-	void send();
-
-	void waitForCommand();
-
+	
 
 	private:
-		void cleanUp();
+		
+		void receive();
+
+		void send();
+
+		void waitForCommand();
+
+		void readbufferIntoStream(char arr[], int sizearr, char packetDelim);
+
+		void readStream(char delim);
 
 		bool connected;
 		bool keepRunning;
@@ -57,6 +61,9 @@ public:
 		recvData recvBuf;
 		sendData sendBuf;
 		sf::TcpSocket sock;
+
+		int waitingPackets;
+		std::stringstream inStream;
 
 };
 

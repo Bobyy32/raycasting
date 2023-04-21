@@ -60,6 +60,38 @@ void jvds::clsTxtPause(std::string text)
 	return;
 }
 
+bool jvds::doesStreamhaveChar(std::stringstream& ss, char delim)
+{
+	auto streampos = ss.tellg();
+	char checker = '\n';
+
+	/*auto result = ss.find(')');*/
+
+//	std::streampos endPos;
+	while (!ss.eof())
+	{
+		ss >> checker;
+		if (checker == ')')
+		{
+			ss.clear();
+			ss.seekg(streampos);
+			return true;
+		}
+	}
+	ss.clear();
+	ss.seekg(streampos);
+	return false;
+}
+
+void jvds::charArrtoStream(char arr[], int sizeArr, std::stringstream& ss)
+{
+	for (int i = 0; i < sizeArr; ++i)
+	{
+		ss << arr[i];
+	}
+	return;
+}
+
 //std::string jvds::getDateString()
 //{
 //	std::string date;
