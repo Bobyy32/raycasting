@@ -73,23 +73,23 @@ void TcpClient::receive()
 	size_t bytesReceived = 0;
 	while (connected && keepRunning) 
 	{
-		auto result = sock.receive(dataBuf, sizeof(dataBuf), bytesReceived);
+		auto result = sock.receive(dataBuf, 1024, bytesReceived);
 		if (result == sf::TcpSocket::Done)
 		{
 			std::cout << "recv OK";
 		}
 		if (result == sf::TcpSocket::NotReady)
 		{
-			std::cout << "notready";
+			std::cout << "notready\n";
 		}
 		if (result == sf::TcpSocket::Error)
 		{
-			std::cout << "error recv";
+			std::cout << "error recv\n";
 		}
 		if (result == sf::TcpSocket::Disconnected)
 		{
 			connected = false;
-			std::cout << "client disconnected";
+			std::cout << "client disconnected\n";
 		}
 
 		readbufferIntoStream(dataBuf, bytesReceived, ')');
