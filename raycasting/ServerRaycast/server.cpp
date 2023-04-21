@@ -1,14 +1,12 @@
 #include "server.hpp"
 
-server::server(std::string listenPort_, std::string sendPort_, std::string clientIp_)
+server::server(std::string listenPort_, std::string sendPort_)
 {
 	receivePort = listenPort_;
 	sendPort = sendPort_;
-	clientIp = clientIp_;
 
 	connected = false;
 	keepRunning = true;
-
 
 	//inialize the buffers
 
@@ -35,7 +33,6 @@ void server::start()
 		std::cout << "client connected: " << sock.getRemoteAddress() << " port: " << receivePort;
 		connected = true;
 
-		//receive();
 		std::thread commandThread(&server::waitForCommand, this);
 		std::thread sendThread(&server::send, this);
 		std::thread recvThread(&server::receive, this);
@@ -93,10 +90,26 @@ void server::send()
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
+			auto messageStat = sock.send(sendBuf.sendMsg, sizeof(sendBuf.sendMsg));
+			if (messageStat == sf::TcpSocket::Done)
+			{
+				std::cout << "recv OK";
+			}
+			if (messageStat == sf::TcpSocket::NotReady)
+			{
+				std::cout << "notready";
+			}
+			if (messageStat == sf::TcpSocket::Error)
+			{
+				std::cout << "error recv";
+			}
+			if (messageStat == sf::TcpSocket::Disconnected)
+			{
+				std::cout << "client disconnected";
+				connected = false;
+			}
 
-			std::cout << "attempting to send msg " << sendBuf.sendMsg << std::endl;
-			sock.send(sendBuf.sendMsg, sizeof(sendBuf.sendMsg));
-			std::cout << "error in sending data\n";
+
 			sendBuf.sendMsgFlag = false;
 		}
 	}

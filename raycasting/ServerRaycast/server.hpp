@@ -26,7 +26,7 @@ class server
 {
 
 public:
-	server(std::string listenPort_, std::string sendPort_, std::string clientIp_);
+	server(std::string listenPort_, std::string sendPort_);
 
 	~server();
 

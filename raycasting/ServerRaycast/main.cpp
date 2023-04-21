@@ -5,7 +5,7 @@
 
 int main(void) 
 {
-	server svr("46580", "46580", "test");
+	server svr("46580", "46580");
 	svr.start();
 }
 
