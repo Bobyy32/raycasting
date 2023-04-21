@@ -30,13 +30,13 @@ void server::start()
 		listen.listen(std::stoi(receivePort));
 		listen.accept(sock);
 
-		std::cout << "client connected: " << sock.getRemoteAddress() << " port: " << receivePort;
+		std::cout << "client connected: " << sock.getRemoteAddress() << " port: " << receivePort << std::endl;
 		connected = true;
 
-		std::thread commandThread(&server::waitForCommand, this);
+		//std::thread commandThread(&server::waitForCommand, this);
 		std::thread sendThread(&server::send, this);
 		std::thread recvThread(&server::receive, this);
-		commandThread.join();
+		//commandThread.join();
 		sendThread.join();
 		recvThread.join();
 	}
@@ -49,24 +49,24 @@ void server::receive()
 	size_t receivedData;
 	while (connected && keepRunning)
 	{
-		std::this_thread::sleep_for(std::chrono::seconds(1));
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
 		auto result = sock.receive(dataIn, sizeof(dataIn), receivedData);
 		if (result == sf::TcpSocket::Done)
 		{
-			std::cout << "recv OK";
+			std::cout << "recv OK\n";
 		}
 		if (result == sf::TcpSocket::NotReady)
 		{
-			std::cout << "notready";
+			std::cout << "notready\n";
 		}
 		if (result == sf::TcpSocket::Error)
 		{
-			std::cout << "error recv";
+			std::cout << "error recv\n";
 		}
 		if (result == sf::TcpSocket::Disconnected)
 		{
-			std::cout << "client disconnected";
+			std::cout << "client disconnected\n";
 			connected = false;
 		}
 
@@ -86,29 +86,29 @@ void server::send()
 		sendBuf.sendMsgFlag = true;
 		if (sendBuf.sendMsgFlag == true)
 		{
-			strcpy_s(sendBuf.sendMsg, "sendTest1");
+			strcpy_s(sendBuf.sendMsg, "(sendTest1)");
+			size_t msg = strlen(sendBuf.sendMsg);
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
-			auto messageStat = sock.send(sendBuf.sendMsg, sizeof(sendBuf.sendMsg));
+			auto messageStat = sock.send(sendBuf.sendMsg, msg);
 			if (messageStat == sf::TcpSocket::Done)
 			{
-				std::cout << "recv OK";
+				std::cout << "recv OK Send\n";
 			}
 			if (messageStat == sf::TcpSocket::NotReady)
 			{
-				std::cout << "notready";
+				std::cout << "notready Send\n";
 			}
 			if (messageStat == sf::TcpSocket::Error)
 			{
-				std::cout << "error recv";
+				std::cout << "error recv Send\n";
 			}
 			if (messageStat == sf::TcpSocket::Disconnected)
 			{
-				std::cout << "client disconnected";
+				std::cout << "client disconnected Send";
 				connected = false;
 			}
-
 
 			sendBuf.sendMsgFlag = false;
 		}
@@ -154,5 +154,5 @@ void server::readStream(char delim)
 {
 	std::string str;
 	std::getline(inStream, str, ')');
-	std::cout << "read something";
+	std::cout << "read something\n";
 }
