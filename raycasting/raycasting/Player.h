@@ -8,8 +8,8 @@ private:
 
 	//position
 	//this is to keep track of the position of the player
-	int spwnX = 5;
-	int spwnY = 5;
+	int spwnX = 20;
+	int spwnY = 15;
 
 	float x = static_cast<float>(spwnX * TILE_SIZE);
 	float y = static_cast<float>(spwnY * TILE_SIZE);

@@ -27,6 +27,15 @@
     <ClCompile Include="Raycast.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EntityPool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity_1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -39,6 +48,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Raycast.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity_1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -74,6 +92,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="texture\wood.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="entities\Entity_1.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
