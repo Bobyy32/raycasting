@@ -61,31 +61,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="texture\barrel.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="texture\bluestone.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="texture\colorstone.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="texture\eagle.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="texture\greenlight.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="texture\greystone.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="texture\mossy.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="texture\pillar.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="texture\purplestone.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="texture\redbrick.png">

@@ -2,13 +2,26 @@
 #include "Header.h"
 #include "Player.h"
 
+const std::vector<std::string> TEXTURE_FILES = {
+	"texture/greystone.png",
+	"texture/mossy.png",
+	"texture/redbrick.png",
+	"texture/bluestone.png",
+	"texture/wood.png",
+	"texture/colorstone.png",
+};
 
 class Raycast
 {
 
 private:
+	std::vector<sf::Texture> textures;
 
 public:
+	Raycast();
+
+	void loadTextures(const std::vector<std::string>& textureFiles);
+
 
 	float wrap(float angle) //useless code
 	{

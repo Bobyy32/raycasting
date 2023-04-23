@@ -152,15 +152,10 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="entities\Entity_1.png" />
-    <Image Include="texture\barrel.png" />
     <Image Include="texture\bluestone.png" />
     <Image Include="texture\colorstone.png" />
-    <Image Include="texture\eagle.png" />
-    <Image Include="texture\greenlight.png" />
     <Image Include="texture\greystone.png" />
     <Image Include="texture\mossy.png" />
-    <Image Include="texture\pillar.png" />
-    <Image Include="texture\purplestone.png" />
     <Image Include="texture\redbrick.png" />
     <Image Include="texture\wood.png" />
   </ItemGroup>

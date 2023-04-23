@@ -1,5 +1,22 @@
 #include "Raycast.h"
 
+Raycast::Raycast() 
+{
+    loadTextures(TEXTURE_FILES);
+}
+
+void Raycast::loadTextures(const std::vector<std::string>& textureFiles) 
+{
+    for (const std::string& textureFile : textureFiles) {
+        sf::Texture texture;
+        if (!texture.loadFromFile(textureFile)) {
+            std::cout << "Failed to load texture: " << textureFile << std::endl;
+        }
+        textures.push_back(texture);
+    }
+}
+
+
 std::vector<std::pair<sf::Vector2f, bool>> Raycast::raycast(Player player)
 {
  	//credit: https://www.youtube.com/watch?v=gYRrGTC7GtA&t=424s (code inspired from this video since im not good at math!)
@@ -68,9 +85,6 @@ void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const std::
     float viewAngle = player.getAngle();
     float fov = (FOV * PI) / 180.0f; // Convert FOV to radians
 
-    sf::Color brightColor = sf::Color::White;
-    sf::Color darkColor = sf::Color(0, 0, 0); //dim grey
-
     for (int i = 0; i < intersections.size(); i++)
     {
         float rayAngle = viewAngle - (fov / 2) + (i * fov / (intersections.size() - 1));
@@ -80,27 +94,36 @@ void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const std::
         float correctedDistance = distance * cos(viewAngle - rayAngle);
         float lineHeight = (WINDOW_HEIGHT / correctedDistance) * 100;
 
-        // Shading based on distance
-        float shadingFactor = correctedDistance / 1000.0f; // Assuming maxDistance = 1000.0f in raycast function
+        int mapX = static_cast<int>(intersections[i].first.x / TILE_SIZE);
+        int mapY = static_cast<int>(intersections[i].first.y / TILE_SIZE);
 
-        sf::Color baseColor = sf::Color(
-            static_cast<sf::Uint8>(brightColor.r + shadingFactor * (darkColor.r - brightColor.r)),
-            static_cast<sf::Uint8>(brightColor.g + shadingFactor * (darkColor.g - brightColor.g)),
-            static_cast<sf::Uint8>(brightColor.b + shadingFactor * (darkColor.b - brightColor.b))
-        );
-
-        // Apply different shading for horizontal and vertical walls
+        // Calculate texture coordinates
+        float textureX;
         if (intersections[i].second) { // Horizontal wall
-            baseColor.r = static_cast<sf::Uint8>(baseColor.r * 0.8f);
-            baseColor.g = static_cast<sf::Uint8>(baseColor.g * 0.8f);
-            baseColor.b = static_cast<sf::Uint8>(baseColor.b * 0.8f);
+            textureX = intersections[i].first.x - floor(intersections[i].first.x / TILE_SIZE) * TILE_SIZE;
         }
+        else { // Vertical wall
+            textureX = intersections[i].first.y - floor(intersections[i].first.y / TILE_SIZE) * TILE_SIZE;
+        }
+        textureX /= TILE_SIZE; // Normalize texture coordinates
+
+        // Choose the texture based on the wall type in the world map
+        int textureIndex = worldMap[mapY][mapX];
+        const sf::Texture& texture = textures[textureIndex];
 
         line.setSize(sf::Vector2f(1, lineHeight));
         line.setPosition(sf::Vector2f(i, (WINDOW_HEIGHT / 2) - (lineHeight / 2)));
-        line.setFillColor(baseColor);
+        line.setTexture(&texture);
+        line.setTextureRect(sf::IntRect(static_cast<int>(textureX * texture.getSize().x), 0, 1, texture.getSize().y));
+
+        // Apply shading based on distance
+        float shadingFactor = correctedDistance / 1000.0f; // Assuming maxDistance = 1000.0f in raycast function
+        sf::Color shadingColor = sf::Color(255 * (1 - shadingFactor), 255 * (1 - shadingFactor), 255 * (1 - shadingFactor), 255);
+
+        line.setFillColor(shadingColor);
         window.draw(line);
     }
 }
+
 
 
