@@ -92,6 +92,7 @@ void jvds::charArrtoStream(char arr[], int sizeArr, std::stringstream& ss)
 	return;
 }
 
+//stupid code needs define _CRT_SECURE_NO_WARNING
 //std::string jvds::getDateString()
 //{
 //	std::string date;

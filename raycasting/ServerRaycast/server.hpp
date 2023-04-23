@@ -52,13 +52,24 @@ public:
 
 		void readStream(char delim);
 
+		int currentPrep;
+		void prepMessage();
+
+		void sortScores();
+
+		void insertScore(int score, std::string name);
+
+		void storeScores();
+
+		void readScores();
+
 		bool connected;
 		bool keepRunning;
 		std::string receivePort;
 		std::string sendPort;
 		std::string clientIp;
 
-		recvData recvBuf;
+		recvData LeaderBoard;
 		sendData sendBuf;
 		sf::TcpSocket sock;
 
