@@ -2,11 +2,10 @@
 
 Raycast::Raycast() 
 {
-    loadTextures(TEXTURE_FILES);
+    loadTextures(TEXTURE_FILES, "texture/grass.png","texture/sky.png");
 }
 
-void Raycast::loadTextures(const std::vector<std::string>& textureFiles) 
-{
+void Raycast::loadTextures(const std::vector<std::string>& textureFiles, const std::string& groundTextureFile, const std::string& skyTextureFile) {
     for (const std::string& textureFile : textureFiles) {
         sf::Texture texture;
         if (!texture.loadFromFile(textureFile)) {
@@ -14,14 +13,20 @@ void Raycast::loadTextures(const std::vector<std::string>& textureFiles)
         }
         textures.push_back(texture);
     }
+    // Load ground texture
+    if (!groundTexture.loadFromFile(groundTextureFile)) {
+        std::cout << "Failed to load ground texture: " << groundTextureFile << std::endl;
+    }
+
+    // Load sky texture
+    if (!skyTexture.loadFromFile(skyTextureFile)) {
+        std::cout << "Failed to load sky texture: " << skyTextureFile << std::endl;
+    }
 }
 
 
 std::vector<std::pair<sf::Vector2f, bool>> Raycast::raycast(Player player)
 {
- 	//credit: https://www.youtube.com/watch?v=gYRrGTC7GtA&t=424s (code inspired from this video since im not good at math!)
-    //credit::: https://lodev.org/cgtutor/raycasting.html explanation behind raycasting
-
     int numRays = WINDOW_WIDTH;
     std::vector<std::pair<sf::Vector2f, bool>> intersections;
 
@@ -31,7 +36,6 @@ std::vector<std::pair<sf::Vector2f, bool>> Raycast::raycast(Player player)
 
     for (int i = 0; i < numRays; i++)
     {
-
         float stepSize = 1.0f;
         float maxDistance = 1000.0f;
         sf::Vector2f currentPosition = sf::Vector2f(player.getX(), player.getY());
@@ -66,6 +70,7 @@ std::vector<std::pair<sf::Vector2f, bool>> Raycast::raycast(Player player)
     return intersections;
 }
 
+
 void Raycast::drawRays(sf::RenderWindow& window, const sf::Vector2f& playerPos, const std::vector<sf::Vector2f>& intersections)
 {
     for (const sf::Vector2f& intersection : intersections)
@@ -81,6 +86,13 @@ void Raycast::drawRays(sf::RenderWindow& window, const sf::Vector2f& playerPos, 
 
 void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const std::vector<std::pair<sf::Vector2f, bool>>& intersections)
 {
+    // Draw sky
+    sf::RectangleShape sky(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT / 2));
+    sky.setTexture(&skyTexture);
+    sky.setTextureRect(sf::IntRect(-400, 0, WINDOW_WIDTH, WINDOW_HEIGHT / 2));
+    window.draw(sky);
+
+
     sf::RectangleShape line;
     float viewAngle = player.getAngle();
     float fov = (FOV * PI) / 180.0f; // Convert FOV to radians
@@ -100,10 +112,18 @@ void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const std::
         // Calculate texture coordinates
         float textureX;
         if (intersections[i].second) { // Horizontal wall
-            textureX = intersections[i].first.x - floor(intersections[i].first.x / TILE_SIZE) * TILE_SIZE;
+            textureX = fmod(intersections[i].first.x, TILE_SIZE);
+            int mapY = static_cast<int>(intersections[i].first.y / TILE_SIZE);
+            if (intersections[i].first.y > mapY * TILE_SIZE) { // Flip texture if wall is facing down
+                textureX = TILE_SIZE - textureX;
+            }
         }
         else { // Vertical wall
-            textureX = intersections[i].first.y - floor(intersections[i].first.y / TILE_SIZE) * TILE_SIZE;
+            textureX = fmod(intersections[i].first.y, TILE_SIZE);
+            int mapX = static_cast<int>(intersections[i].first.x / TILE_SIZE);
+            if (intersections[i].first.x < mapX * TILE_SIZE) { // Flip texture if wall is facing left
+                textureX = TILE_SIZE - textureX;
+            }
         }
         textureX /= TILE_SIZE; // Normalize texture coordinates
 
@@ -124,6 +144,3 @@ void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const std::
         window.draw(line);
     }
 }
-
-
-

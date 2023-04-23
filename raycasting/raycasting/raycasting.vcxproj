@@ -154,9 +154,11 @@
     <Image Include="entities\Entity_1.png" />
     <Image Include="texture\bluestone.png" />
     <Image Include="texture\colorstone.png" />
+    <Image Include="texture\grass.png" />
     <Image Include="texture\greystone.png" />
     <Image Include="texture\mossy.png" />
     <Image Include="texture\redbrick.png" />
+    <Image Include="texture\sky.png" />
     <Image Include="texture\wood.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

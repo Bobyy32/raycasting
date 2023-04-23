@@ -82,5 +82,11 @@
     <Image Include="entities\Entity_1.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="texture\sky.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="texture\grass.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

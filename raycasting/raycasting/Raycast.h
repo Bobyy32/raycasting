@@ -16,12 +16,12 @@ class Raycast
 
 private:
 	std::vector<sf::Texture> textures;
-
+	sf::Texture groundTexture;
+	sf::Texture skyTexture;
 public:
 	Raycast();
 
-	void loadTextures(const std::vector<std::string>& textureFiles);
-
+	void loadTextures(const std::vector<std::string>& textureFiles, const std::string& groundTextureFile, const std::string& skyTextureFile);
 
 	float wrap(float angle) //useless code
 	{
