@@ -73,10 +73,10 @@ void TcpClient::receive()
 	size_t bytesReceived = 0;
 	while (connected && keepRunning) 
 	{
-		auto result = sock.receive(dataBuf, 1024, bytesReceived);
+		auto result = sock.receive(dataBuf, 1023, bytesReceived);
 		if (result == sf::TcpSocket::Done)
 		{
-			std::cout << "recv OK";
+			std::cout << "recv OK\n";
 		}
 		if (result == sf::TcpSocket::NotReady)
 		{
@@ -102,21 +102,45 @@ void TcpClient::receive()
 
 void TcpClient::send()
 {
+	int incrementer = 0;
 	while (connected && keepRunning) 
 	{
-		std::this_thread::sleep_for(std::chrono::seconds(1));
+		size_t sizemsg = strlen(sendBuf.sendMsg);
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		if (sendBuf.sendMsgFlag == true) 
 		{
-			sock.send(sendBuf.sendMsg, sendBuf.sizeMsg);
+			sock.send(sendBuf.sendMsg, sizemsg);
 			sendBuf.sendMsgFlag == false;
 		}
+		//std::cout << "incrementer is:" << incrementer << std::endl;
+		++incrementer;
 	}
 }
 
 void TcpClient::readStream(char delim)
 {
-	std::string getin;
-	std::getline(inStream, getin, delim);
-	std::cout << getin << std::endl;
+	while (waitingPackets > 0) 
+	{
+		std::string score;
+		std::string index;
+		std::string name;
+		int IntScore = 0;
+		int intIndex = 0;
+
+		char throwaway = 'a';
+		inStream >> throwaway;
+		std::getline(inStream, index, ',');
+		std::getline(inStream, name, ',');
+		std::getline(inStream, score, ',');
+		inStream >> throwaway;
+
+		IntScore = std::stoi(score);
+		intIndex = std::stoi(index);
+
+		recvBuf.scoreList[intIndex].EntryName = name;
+		recvBuf.scoreList[intIndex].score = IntScore;
+		--waitingPackets;
+	}
+	
 	return;
 }
