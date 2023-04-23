@@ -92,7 +92,7 @@ void Game::render()
 
 	/*player.draw(*this->window);*/
 
-	std::vector<std::pair<sf::Vector2f, bool>> intersections = raycast.raycast(player);
+	std::vector<sf::Vector2f> intersections = raycast.raycast(player);
 	raycast.draw3D(*window, player, intersections);
 
 	/*raycast.drawRays(*window, sf::Vector2f(player.getX(), player.getY()), intersections);*/

@@ -15,13 +15,8 @@ class Raycast
 {
 
 private:
-	std::vector<sf::Texture> textures;
-	sf::Texture groundTexture;
-	sf::Texture skyTexture;
-public:
-	Raycast();
 
-	void loadTextures(const std::vector<std::string>& textureFiles, const std::string& groundTextureFile, const std::string& skyTextureFile);
+public:
 
 	float wrap(float angle) //useless code
 	{
@@ -30,12 +25,9 @@ public:
 		return angle;
 	}
 
-	//std::vector<sf::Vector2f> raycast(Player player);
-	std::vector<std::pair<sf::Vector2f, bool>> raycast(Player player);	//reason for change is to maybe add a bool to the vector to see if the ray hit a wall or not
-
+	std::vector<sf::Vector2f> raycast(Player player);
 	void drawRays(sf::RenderWindow& window, const sf::Vector2f& playerPos, const std::vector<sf::Vector2f>& intersections);
-
-	void draw3D(sf::RenderWindow& window, const Player& player, const std::vector<std::pair<sf::Vector2f, bool>>& intersections);
+	void draw3D(sf::RenderWindow& window, const Player& player, const std::vector<sf::Vector2f>& intersections);
 
 };
 
