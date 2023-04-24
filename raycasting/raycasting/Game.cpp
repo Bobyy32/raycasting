@@ -20,6 +20,7 @@ Game::Game()
 {
 	this->initializeVariables();
 	this->initializeWindow();
+	this->round = 0;
 }
 
 Game::~Game()
@@ -73,7 +74,8 @@ void Game::update()
 
 	player.update(deltaTime);
 
-	/*raycast.raycast(player);*/
+	entityPool.updateEntities(deltaTime, player, round);
+
 	
 }
 
@@ -90,14 +92,8 @@ void Game::render()
 
 	//Draw game 
 
-	/*player.draw(*this->window);*/
-
 	std::vector<sf::Vector2f> intersections = raycast.raycast(player);
 	raycast.draw3D(*window, player, intersections);
-
-	/*raycast.drawRays(*window, sf::Vector2f(player.getX(), player.getY()), intersections);*/
-
-	/*drawMap();*/
 
 	this->window->display();
 

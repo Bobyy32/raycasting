@@ -1,6 +1,6 @@
 #include "Raycast.h"
 
-std::vector<sf::Vector2f> Raycast::raycast(Player player)
+std::vector<sf::Vector2f> Raycast::raycast(const Player& player, const EntityPool& entityPool)
 {
     //credit: https://www.youtube.com/watch?v=gYRrGTC7GtA&t=424s (code inspired from this video since im not good at math!)
     //credit::: https://lodev.org/cgtutor/raycasting.html explanation behind raycasting
@@ -36,7 +36,7 @@ std::vector<sf::Vector2f> Raycast::raycast(Player player)
             }
             else
             {
-                break; // Out of the map bounds
+                break; // Out of map bounds
             }
         }
 
@@ -61,13 +61,12 @@ void Raycast::drawRays(sf::RenderWindow& window, const sf::Vector2f& playerPos, 
     }
 }
 
-void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const std::vector<sf::Vector2f>& intersections)
+void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const EntityPool& entityPool, const std::vector<sf::Vector2f>& intersections)
 {
     sf::RectangleShape line;
     float viewAngle = player.getAngle();
     float fov = (FOV * PI) / 180.0f; // Convert FOV to radians
-    /*int screenWidth = 800;
-    int screenHeight = 600;*/
+
 
     sf::Color brightColor = sf::Color::White;
     sf::Color darkColor = sf::Color(0, 0, 0); // Dark red
@@ -82,7 +81,7 @@ void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const std::
         float lineHeight = (WINDOW_HEIGHT / correctedDistance) * 100;
 
         // Shading based on distance
-        float shadingFactor = correctedDistance / 1000.0f; // Assuming maxDistance = 1000.0f in raycast function
+        float shadingFactor = correctedDistance / 1000.0f; 
         sf::Color shadedColor = sf::Color(
             brightColor.r + shadingFactor * (darkColor.r - brightColor.r),
             brightColor.g + shadingFactor * (darkColor.g - brightColor.g),

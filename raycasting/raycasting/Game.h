@@ -8,6 +8,9 @@ Game Wrapper Class
 #include "Header.h"
 #include "Player.h"
 #include "Raycast.h"
+#include "EntityPool.h"
+#include "Entity.h"
+#include "Entity_1.h"
 
 
 class Game
@@ -25,13 +28,16 @@ private:
 
 	float lastFrameTime;
 
+	int round;
+
 	void initializeVariables();
 	void initializeWindow();
 
 	Player player;
 
-	Raycast raycast;
+	EntityPool entityPool;
 
+	Raycast raycast;
 
 public:
 	Game();

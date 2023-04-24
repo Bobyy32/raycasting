@@ -1,20 +1,13 @@
 #pragma once
 #include "Header.h"
 #include "Player.h"
-
-const std::vector<std::string> TEXTURE_FILES = {
-	"texture/greystone.png",
-	"texture/mossy.png",
-	"texture/redbrick.png",
-	"texture/bluestone.png",
-	"texture/wood.png",
-	"texture/colorstone.png",
-};
+#include "EntityPool.h"
 
 class Raycast
 {
 
 private:
+
 
 public:
 
@@ -25,9 +18,9 @@ public:
 		return angle;
 	}
 
-	std::vector<sf::Vector2f> raycast(Player player);
+	std::vector<sf::Vector2f> raycast(const Player& player, const EntityPool& entityPool);
 	void drawRays(sf::RenderWindow& window, const sf::Vector2f& playerPos, const std::vector<sf::Vector2f>& intersections);
-	void draw3D(sf::RenderWindow& window, const Player& player, const std::vector<sf::Vector2f>& intersections);
+	void draw3D(sf::RenderWindow& window, const Player& player, const EntityPool& entityPool, const std::vector<sf::Vector2f>& intersections);
 
 };
 
