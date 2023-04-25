@@ -4,14 +4,14 @@ Entity::Entity()
 {
 	this->position = sf::Vector2f(5.0f, 5.0f);
 	this->health = 100;
-	this->speed = 10.0f;
+	this->speed = 20.0f;
 }
 
 Entity::Entity(sf::Vector2f& pos)
 {
 	this->position = pos;
 	this->health = 100;
-	this->speed = 1.0f;
+	this->speed = 50.0f;
 }
 
 Entity::~Entity()

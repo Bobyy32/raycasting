@@ -1,12 +1,15 @@
 #include "Raycast.h"
 
-std::vector<sf::Vector2f> Raycast::raycast(const Player& player, const EntityPool& entityPool)
+#include <vector>
+#include <utility> // for std::pair
+
+std::vector<std::pair<sf::Vector2f, float>> Raycast::raycast(const Player& player, const EntityPool& entityPool)
 {
     //credit: https://www.youtube.com/watch?v=gYRrGTC7GtA&t=424s (code inspired from this video since im not good at math!)
     //credit::: https://lodev.org/cgtutor/raycasting.html explanation behind raycasting
 
     int numRays = WINDOW_WIDTH;
-    std::vector<sf::Vector2f> intersections;
+    std::vector<std::pair<sf::Vector2f, float>> intersections;
 
     // Convert FOV to radians and wrap the angle in radians
     float radiansFOV = (FOV * PI) / 180.0f;
@@ -30,7 +33,7 @@ std::vector<sf::Vector2f> Raycast::raycast(const Player& player, const EntityPoo
             {
                 if (worldMap[mapY][mapX] != 0)
                 {
-                    intersections.push_back(intersection);
+                    intersections.push_back(std::make_pair(intersection, currentDistance));
                     break;
                 }
             }
@@ -48,6 +51,7 @@ std::vector<sf::Vector2f> Raycast::raycast(const Player& player, const EntityPoo
     return intersections;
 }
 
+
 void Raycast::drawRays(sf::RenderWindow& window, const sf::Vector2f& playerPos, const std::vector<sf::Vector2f>& intersections)
 {
     for (const sf::Vector2f& intersection : intersections)
@@ -61,7 +65,7 @@ void Raycast::drawRays(sf::RenderWindow& window, const sf::Vector2f& playerPos, 
     }
 }
 
-void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const EntityPool& entityPool, const std::vector<sf::Vector2f>& intersections)
+void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const EntityPool& entityPool, const std::vector<std::pair<sf::Vector2f, float>>& intersections)
 {
     sf::RectangleShape line;
     float viewAngle = player.getAngle();
@@ -74,7 +78,7 @@ void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const Entit
     for (int i = 0; i < intersections.size(); i++)
     {
         float rayAngle = viewAngle - (fov / 2) + (i * fov / (intersections.size() - 1));
-        float distance = std::sqrt(std::pow(player.getX() - intersections[i].x, 2) + std::pow(player.getY() - intersections[i].y, 2));
+        float distance = std::sqrt(std::pow(player.getX() - intersections[i].first.x, 2) + std::pow(player.getY() - intersections[i].first.y, 2));
 
         // Fish eye effect fix (IMPORTANT)
         float correctedDistance = distance * cos(viewAngle - rayAngle);
@@ -94,4 +98,64 @@ void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const Entit
         window.draw(line);
     }
 }
+
+void Raycast::drawSprites(sf::RenderWindow& window, const Player& player, const EntityPool& entityPool, const std::vector<std::pair<sf::Vector2f, float>>& intersections)
+{
+    std::vector<Entity*> entities = entityPool.getEntities();
+    std::vector<std::pair<Entity*, float>> entitiesWithDistance;
+
+    // Calculate the distance between the player and each entity
+    for (Entity* entity : entities)
+    {
+        sf::Vector2f entityPos = entity->getPos();
+        float dx = player.getX() - entityPos.x;
+        float dy = player.getY() - entityPos.y;
+        float distance = std::sqrt(dx * dx + dy * dy);
+
+        entitiesWithDistance.push_back(std::make_pair(entity, distance));
+    }
+
+    // Sort the entities by distance (descending order)
+    std::sort(entitiesWithDistance.begin(), entitiesWithDistance.end(), [](const std::pair<Entity*, float>& a, const std::pair<Entity*, float>& b)
+        {
+            return a.second > b.second;
+        });
+
+    // Draw the entities
+    for (const auto& entityWithDistance : entitiesWithDistance)
+    {
+        Entity* entity = entityWithDistance.first;
+        float distance = entityWithDistance.second;
+
+        sf::Sprite sprite = entity->getSprite();
+        sf::Vector2f entityPos = entity->getPos();
+
+        // Calculate the relative position of the entity to the player
+        float dx = entityPos.x - player.getX();
+        float dy = entityPos.y - player.getY();
+
+        // Calculate the angle between the player's view and the entity
+        float viewAngle = player.getAngle();
+        float angleToEntity = atan2(dy, dx) - viewAngle;
+
+        // Project the sprite's position onto the player's view plane
+        float spriteScreenX = (WINDOW_WIDTH / 2) + (WINDOW_WIDTH / 2) * tan(angleToEntity) / tan(FOV * PI / 360.0f);
+
+        // Calculate the sprite's height and scale
+        float spriteHeight = (WINDOW_HEIGHT / distance) * 100;
+        float spriteScale = spriteHeight / sprite.getTextureRect().height;
+
+        // Set the sprite's position, scale, and orientation
+        sprite.setScale(spriteScale, spriteScale);
+        sprite.setPosition(spriteScreenX - sprite.getGlobalBounds().width / 2, (WINDOW_HEIGHT / 2) - (spriteHeight / 2));
+
+        // Draw the sprite
+        window.draw(sprite);
+    }
+}
+
+
+
+
+
 

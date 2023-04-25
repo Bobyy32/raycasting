@@ -14,7 +14,7 @@ Entity_1::Entity_1(sf::Vector2f& pos) : Entity(pos)
 	this->name = "Entity_1";
 	this->position = pos;
 	this->sprite.setPosition(this->position);
-	this->texture.loadFromFile("entities/Entity_1.png");
+	this->texture.loadFromFile("texture/sky.png");
 	this->sprite.setTexture(this->texture);
 }
 

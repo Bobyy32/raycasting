@@ -33,4 +33,5 @@ public:
 
 	std::string getName()const { return this->name; }
 
+	sf::Sprite& getSprite() { return this->sprite; }
 };

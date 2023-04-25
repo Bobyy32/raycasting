@@ -92,8 +92,10 @@ void Game::render()
 
 	//Draw game 
 
-	std::vector<sf::Vector2f> intersections = raycast.raycast(player);
-	raycast.draw3D(*window, player, intersections);
+	std::vector<std::pair<sf::Vector2f, float>> intersections = raycast.raycast(player, entityPool);
+	raycast.draw3D(*window, player, entityPool, intersections);
+	raycast.drawSprites(*window, player, entityPool, intersections);
+
 
 	this->window->display();
 
