@@ -138,7 +138,7 @@ void Raycast::drawSprites(sf::RenderWindow& window, const Player& player, const 
         float viewAngle = player.getAngle();
         float angleToEntity = atan2(dy, dx) - viewAngle;
 
-        // Project the sprite's position onto the player's view plane
+        // Project the sprite's position onto the player's view plane (2d camera matrix)
         float spriteScreenX = (WINDOW_WIDTH / 2) + (WINDOW_WIDTH / 2) * tan(angleToEntity) / tan(FOV * PI / 360.0f);
 
         // Calculate the sprite's height and scale

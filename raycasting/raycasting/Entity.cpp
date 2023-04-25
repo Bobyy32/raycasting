@@ -11,7 +11,7 @@ Entity::Entity(sf::Vector2f& pos)
 {
 	this->position = pos;
 	this->health = 100;
-	this->speed = 50.0f;
+	this->speed = 20.0f;
 }
 
 Entity::~Entity()
