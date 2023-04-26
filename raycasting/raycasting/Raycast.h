@@ -2,6 +2,8 @@
 #include "Header.h"
 #include "Player.h"
 #include "EntityPool.h"
+#include "Gun.h"
+#include "Projectile.h"
 
 class Raycast
 {
@@ -21,7 +23,8 @@ public:
 	std::vector<std::pair<sf::Vector2f, float>> raycast(const Player& player, const EntityPool& entityPool);
 	void drawRays(sf::RenderWindow& window, const sf::Vector2f& playerPos, const std::vector<sf::Vector2f>& intersections);
 	void draw3D(sf::RenderWindow& window, const Player& player, const EntityPool& entityPool, const std::vector<std::pair<sf::Vector2f, float>>& intersections);
-	void drawSprites(sf::RenderWindow& window, const Player& player, const EntityPool& entityPool, const std::vector<std::pair<sf::Vector2f, float>>& intersections);
+	void drawSprites(sf::RenderWindow& window, const Player& player, const EntityPool& entityPool, Gun& gun, const std::vector<std::pair<sf::Vector2f, float>>& intersections);
+
 
 };
 

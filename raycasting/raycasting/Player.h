@@ -14,10 +14,7 @@ private:
 	float x = static_cast<float>(spwnX * TILE_SIZE);
 	float y = static_cast<float>(spwnY * TILE_SIZE);
 
-	/*float x = 100;
-	float y = 100;*/
-
-	//angle
+	//angle in radians
 	float angle = 0;
 
 	//change in x and y
@@ -38,5 +35,8 @@ public:
 	float getAngle()const { return this->angle; }
 	float getDX()const { return this->dx; }
 	float getDY()const { return this->dy; }
+
+	sf::Vector2f getPos()const { return sf::Vector2f(this->x, this->y); }
+
 };
 

@@ -76,7 +76,20 @@ void Game::update()
 
 	entityPool.updateEntities(deltaTime, player, round);
 
-	
+	timer += deltaTime;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timer >= delay) {
+
+		sf::Vector2f playerPos(player.getX(), player.getY());
+		sf::Vector2f direction(std::cos(player.getAngle()), std::sin(player.getAngle()));
+ 
+		gun.shoot(playerPos, -direction);
+
+		timer = 0.0f; // Reset the timer
+	}	
+
+	gun.updateProjectiles(deltaTime, entityPool);
+
 }
 
 void Game::render()
@@ -94,7 +107,7 @@ void Game::render()
 
 	std::vector<std::pair<sf::Vector2f, float>> intersections = raycast.raycast(player, entityPool);
 	raycast.draw3D(*window, player, entityPool, intersections);
-	raycast.drawSprites(*window, player, entityPool, intersections);
+	raycast.drawSprites(*window, player, entityPool, gun,intersections);
 
 
 	this->window->display();

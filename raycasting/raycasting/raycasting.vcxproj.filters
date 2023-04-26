@@ -36,6 +36,12 @@
     <ClCompile Include="Entity_1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Gun.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -59,33 +65,18 @@
     <ClInclude Include="Entity_1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Gun.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="texture\bluestone.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="texture\colorstone.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="texture\greystone.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="texture\mossy.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="texture\redbrick.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="texture\wood.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="entities\Entity_1.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="texture\sky.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="texture\grass.png">
+    <Image Include="entities\Projectile_1.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

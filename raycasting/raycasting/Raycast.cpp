@@ -99,7 +99,7 @@ void Raycast::draw3D(sf::RenderWindow& window, const Player& player, const Entit
     }
 }
 
-void Raycast::drawSprites(sf::RenderWindow& window, const Player& player, const EntityPool& entityPool, const std::vector<std::pair<sf::Vector2f, float>>& intersections)
+void Raycast::drawSprites(sf::RenderWindow& window, const Player& player, const EntityPool& entityPool, Gun& gun, const std::vector<std::pair<sf::Vector2f, float>>& intersections)
 {
     std::vector<Entity*> entities = entityPool.getEntities();
     std::vector<std::pair<Entity*, float>> entitiesWithDistance;
@@ -136,26 +136,62 @@ void Raycast::drawSprites(sf::RenderWindow& window, const Player& player, const 
 
         // Calculate the angle between the player's view and the entity
         float viewAngle = player.getAngle();
-        float angleToEntity = atan2(dy, dx) - viewAngle;
+        float angleToEntity = atan2(-dy, -dx) - viewAngle;
 
-        // Project the sprite's position onto the player's view plane (2d camera matrix)
-        float spriteScreenX = (WINDOW_WIDTH / 2) + (WINDOW_WIDTH / 2) * tan(angleToEntity) / tan(FOV * PI / 360.0f);
+        while (angleToEntity > PI) angleToEntity -= 2 * PI;
+        while (angleToEntity < -PI) angleToEntity += 2 * PI;
 
-        // Calculate the sprite's height and scale
-        float spriteHeight = (WINDOW_HEIGHT / distance) * 100;
-        float spriteScale = spriteHeight / sprite.getTextureRect().height;
+        // Check if the sprite is within the camera's horizontal field of view
+        float halfHorizontalFOV = FOV * PI / 360.0f;
+        if (angleToEntity > -halfHorizontalFOV && angleToEntity < halfHorizontalFOV)
+        {
+            // Calculate the sprite's screen position only if it's within the camera's field of view
+            float spriteScreenX = (WINDOW_WIDTH / 2) + (WINDOW_WIDTH / 2) * tan(angleToEntity) / tan(halfHorizontalFOV);
 
-        // Set the sprite's position, scale, and orientation
-        sprite.setScale(spriteScale, spriteScale);
-        sprite.setPosition(spriteScreenX - sprite.getGlobalBounds().width / 2, (WINDOW_HEIGHT / 2) - (spriteHeight / 2));
+            float spriteHeight = (WINDOW_HEIGHT / distance) * 100;
+            float spriteScale = spriteHeight / sprite.getTextureRect().height;
 
-        // Draw the sprite
-        window.draw(sprite);
+            // Set the sprite's position, scale, and orientation
+            sprite.setScale(spriteScale, spriteScale);
+            sprite.setPosition(spriteScreenX - sprite.getGlobalBounds().width / 2, (WINDOW_HEIGHT / 2) - (spriteHeight / 2));
+
+            window.draw(sprite);
+        }
+    }
+
+    float halfHorizontalFOV = FOV * PI / 360.0f;
+    // Draw the projectiles
+    std::vector<Projectile*> projectiles = gun.getProjectiles();
+
+    // Draw the projectiles
+    for (auto projectile : projectiles)
+    {
+        sf::Sprite projectileSprite = projectile->getSprite();
+        sf::Vector2f projectilePos = projectile->getPos();
+
+        float dx = projectilePos.x - player.getX();
+        float dy = projectilePos.y - player.getY();
+        float distance = std::sqrt(dx * dx + dy * dy);
+
+        float angleToProjectile = atan2(-dy, -dx) - player.getAngle();
+
+        while (angleToProjectile > PI) angleToProjectile -= 2 * PI;
+        while (angleToProjectile < -PI) angleToProjectile += 2 * PI;
+
+        // Check if the sprite is within the camera's horizontal field of view
+        if (angleToProjectile > -halfHorizontalFOV && angleToProjectile < halfHorizontalFOV)
+        {
+            // Calculate the sprite's screen position only if it's within the camera's field of view
+            float projectileScreenX = (WINDOW_WIDTH / 2) + (WINDOW_WIDTH / 2) * tan(angleToProjectile) / tan(halfHorizontalFOV);
+
+            float projectileHeight = (WINDOW_HEIGHT / distance) * 100;
+            float projectileScale = projectileHeight / projectileSprite.getTextureRect().height;
+
+            // Set the sprite's position, scale, and orientation
+            projectileSprite.setScale(projectileScale, projectileScale);
+            projectileSprite.setPosition(projectileScreenX - projectileSprite.getGlobalBounds().width / 2, (WINDOW_HEIGHT / 2) - (projectileHeight / 2));
+
+            window.draw(projectileSprite);
+        }
     }
 }
-
-
-
-
-
-

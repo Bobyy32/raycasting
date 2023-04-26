@@ -1,6 +1,9 @@
 #include "Game.h"
 int main(void)
 {
+
+	std::srand(static_cast<unsigned>(time(NULL)));
+
 	//Initiate game
 	Game game;
 

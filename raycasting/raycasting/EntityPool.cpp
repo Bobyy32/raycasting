@@ -24,8 +24,7 @@ void EntityPool::addEntity(const int& round)
 }
 
 sf::Vector2f EntityPool::randSpawn(int map[][MAP_WIDTH])
-{
-	std::srand(static_cast<unsigned>(time(NULL)));
+{	
 	int x = 0;
 	int y = 0;
 	do

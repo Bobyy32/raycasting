@@ -137,7 +137,9 @@
     <ClCompile Include="EntityPool.cpp" />
     <ClCompile Include="Entity_1.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Raycast.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
@@ -146,20 +148,15 @@
     <ClInclude Include="EntityPool.h" />
     <ClInclude Include="Entity_1.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Gun.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="Raycast.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="entities\Entity_1.png" />
-    <Image Include="texture\bluestone.png" />
-    <Image Include="texture\colorstone.png" />
-    <Image Include="texture\grass.png" />
-    <Image Include="texture\greystone.png" />
-    <Image Include="texture\mossy.png" />
-    <Image Include="texture\redbrick.png" />
-    <Image Include="texture\sky.png" />
-    <Image Include="texture\wood.png" />
+    <Image Include="entities\Projectile_1.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

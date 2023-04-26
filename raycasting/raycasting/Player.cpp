@@ -16,35 +16,6 @@ Player::Player()
     // Set origin to the center of the shape
     shape.setOrigin(sf::Vector2f(radius, radius));
 
-    //// Find a valid spawn position within the map boundaries
-    //int spawnX = 0;
-    //int spawnY = 0;
-    //bool spawnFound = false;
-    //for (int y = 0; y < MAP_HEIGHT; y++) {
-    //    for (int x = 0; x < MAP_WIDTH; x++) {
-    //        if (worldMap[y][x] == 0) {
-    //            spawnX = x;
-    //            spawnY = y;
-    //            spawnFound = true;
-    //            break;
-    //        }
-    //    }
-    //    if (spawnFound) {
-    //        break;
-    //    }
-    //}
-
-    //// Set position based on the spawn position
-    //if (spawnFound) {
-    //    shape.setPosition(sf::Vector2f(spawnX/ 2, spawnY/ 2));
-    //}
-    //else {
-    //    // If no valid spawn position found, set position to the top-left corner of the map
-    //    shape.setPosition(sf::Vector2f(TILE_SIZE / 2, TILE_SIZE / 2));
-    //}
-
-    // Set the color of the player
-
     shape.setFillColor(sf::Color::Green);
 }
 

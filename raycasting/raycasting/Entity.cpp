@@ -27,7 +27,4 @@ void Entity::followPlayer(const Player& player, const float& d_Time)
 	direction.x /= length;
 	direction.y /= length;
 	this->position += direction * this->speed * d_Time;
-
-	std::cout << "Entity position: " << this->position.x << " " << this->position.y;
-	std::cout << " Player position: " << playerPos.x << " " << playerPos.y << std::endl;
 }
