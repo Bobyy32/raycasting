@@ -13,6 +13,7 @@ Game Wrapper Class
 #include "Entity_1.h"
 #include "Gun.h"
 #include "TcpClient.hpp"
+#include "UnitTesting.h"
 
 class Game
 {
@@ -42,6 +43,9 @@ private:
 	Raycast raycast;
 
 	Gun gun;
+
+	UnitTesting unitTesting;
+
 
 	// for shooting mechanic
 	float delay = 0.3f; // Delay in seconds

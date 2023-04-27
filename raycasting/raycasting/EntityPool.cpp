@@ -62,3 +62,8 @@ void EntityPool::updateEntities(const float& d_Time,const Player& player, int& r
 	}
 }
 
+void EntityPool::removeEntity(const int& index)
+{
+	delete entities.at(index);
+	entities.erase(entities.begin() + index);
+}
