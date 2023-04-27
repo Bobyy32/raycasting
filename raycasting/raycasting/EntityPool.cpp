@@ -12,7 +12,7 @@ EntityPool::~EntityPool()
 
 void EntityPool::addEntity(const int& round)
 {
-	int num_entities = static_cast<int>(std::pow(2.71828, round));
+	int num_entities = round;
 
 	for (int i = 0; i < num_entities; i++)
 	{

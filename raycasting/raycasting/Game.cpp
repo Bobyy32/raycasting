@@ -22,14 +22,20 @@ void Game::initializeWindow()
 	this->window->setFramerateLimit(FPS);
 }
 
-Game::Game()
+Game::Game(TcpClient* client_)
 {
+	ptrClient = client_;
 	this->initializeVariables();
 	this->initializeWindow();
 }
 
 Game::~Game()
 {
+	TcpClient* client = ptrClient;
+	std::string msg;
+	msg + "(" + std::to_string(currentScore) + "," + "EMPTY" + ",)";
+	strcpy_s(client->getSendBuf()->sendMsg, msg.c_str());
+	client->getSendBuf()->sendMsgFlag = true;
 	delete this->window;
 }
 
@@ -94,6 +100,8 @@ void Game::update()
 	}	
 
 	gun.updateProjectiles(deltaTime, entityPool);
+
+	updateTopScores();
 
 }
 
@@ -172,7 +180,19 @@ void Game::drawScore()
 
 void Game::updateTopScores()
 {
+	ptrClient->getscoreArr()->scoreList[1];
 
+	if (ptrClient->getscoreArr()->curSize >= 1){
+		topScore1 = ptrClient->getscoreArr()->scoreList[0].score;
+	}
+
+	if (ptrClient->getscoreArr()->curSize >= 2) {
+		topScore2 = ptrClient->getscoreArr()->scoreList[1].score;
+	}
+
+	if (ptrClient->getscoreArr()->curSize >= 3) {
+		topScore3 = ptrClient->getscoreArr()->scoreList[2].score;
+	}
 
 }
 

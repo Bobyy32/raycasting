@@ -12,12 +12,13 @@ Game Wrapper Class
 #include "Entity.h"
 #include "Entity_1.h"
 #include "Gun.h"
-
+#include "TcpClient.hpp"
 
 class Game
 {
 private:
 
+	
 	sf::RenderWindow* window;
 	sf::VideoMode videoMode;
 	sf::Event ev;
@@ -54,7 +55,7 @@ private:
 
 
 public:
-	Game();
+	Game(TcpClient* client_);
 	virtual ~Game();
 
 	//Accessors
@@ -71,7 +72,7 @@ public:
 	void drawScore();
 
 	void updateTopScores();
-
+	TcpClient* ptrClient;
 };
 
 
