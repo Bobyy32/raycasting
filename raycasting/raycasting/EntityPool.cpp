@@ -1,3 +1,15 @@
+/************************************************************************
+* Programmer: Elang Edward Sisson                                       *
+* Class: CptS 122;				                                        *
+* Programming Assignment: 9									            *
+* Date:																	*
+*                                                                       *
+* Description: Raycast Game 											*
+*																		*
+*                                                                       *
+* Relevant Formulas:													*
+*																		*
+************************************************************************/
 #include "EntityPool.h"
 
 EntityPool::EntityPool()

@@ -1,3 +1,27 @@
+/************************************************************************
+* Programmer: Elang Edward Sisson                                       *
+* Class: CptS 122;				                                        *
+* Programming Assignment: 9									            *
+* Date:																	*
+*                                                                       *
+* Description: Raycast Game 											*
+*																		*
+*                                                                       *
+* Relevant Formulas:													*
+*																		*
+************************************************************************/
+/************************************************************************
+* Programmer: Sean Duffy		                                        *
+* Class: CptS 122;				                                        *
+* Programming Assignment: 9									            *
+* Date:																	*
+*                                                                       *
+* Description: Raycast Game 											*
+*																		*
+*                                                                       *
+* Relevant Formulas:													*
+*																		*
+************************************************************************/
 #include "Game.h"
 
 void Game::initializeVariables()

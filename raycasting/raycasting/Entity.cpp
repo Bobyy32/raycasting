@@ -1,3 +1,15 @@
+/************************************************************************
+* Programmer: Sean Duffy		                                        *
+* Class: CptS 122;				                                        *
+* Programming Assignment: 9									            *
+* Date:																	*
+*                                                                       *
+* Description: Raycast Game 											*
+*																		*
+*                                                                       *
+* Relevant Formulas:													*
+*																		*
+************************************************************************/
 #include "Entity.h"
 
 Entity::Entity()
