@@ -144,6 +144,7 @@
     <ClCompile Include="Raycast.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TcpClient.cpp" />
+    <ClCompile Include="UnitTesting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bundler.hpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Raycast.h" />
     <ClInclude Include="TcpClient.hpp" />
+    <ClInclude Include="UnitTesting.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="entities\Entity_1.png" />

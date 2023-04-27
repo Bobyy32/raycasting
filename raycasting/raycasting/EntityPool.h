@@ -22,7 +22,7 @@ public:
 
 	int isEmpty()const { return this->entities.size() == 0; }
 
-
+	void removeEntity(const int& index);
 
 
 };

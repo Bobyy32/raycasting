@@ -24,6 +24,9 @@ void Game::initializeWindow()
 
 Game::Game(TcpClient* client_)
 {
+	unitTesting.runTests();
+
+
 	ptrClient = client_;
 	this->initializeVariables();
 	this->initializeWindow();
