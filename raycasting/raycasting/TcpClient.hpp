@@ -1,3 +1,6 @@
+//commented file is in the raycasting tcp client file
+//author Justin Van Der Sluys
+
 #pragma once
 #include <mutex>
 #include "Bundler.hpp"

@@ -1,5 +1,6 @@
 /************************************************************************
-* Programmer: Elang Edward Sisson                                       *
+* Programmer: Elang Edward Sisson  
+* contributors: Justin Van Der Sluys
 * Class: CptS 122;				                                        *
 * Programming Assignment: 9									            *
 * Date:																	*
