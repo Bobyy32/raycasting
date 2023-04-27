@@ -138,6 +138,7 @@
     <ClCompile Include="Entity_1.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gun.cpp" />
+    <ClCompile Include="LeaderBoard.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Raycast.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gun.h" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="LeaderBoard.hpp" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Raycast.h" />

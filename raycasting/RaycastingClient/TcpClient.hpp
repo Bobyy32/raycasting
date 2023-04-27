@@ -1,4 +1,5 @@
 #pragma once
+#include <mutex>
 #include "Bundler.hpp"
 #include "SFML/System.hpp"
 #include "SFML/Network.hpp"
@@ -34,7 +35,11 @@ public:
 
 	void killServer();
 
-	
+	recvData* getscoreArr();
+
+	sendData* getSendBuf();
+
+	void operator<<(std::string& rhs);
 
 
 private:
@@ -46,6 +51,8 @@ private:
 	void send();
 
 	void readStream(char delim);
+
+	std::mutex mutex;
 
 	bool connected;
 	bool keepRunning;
@@ -59,6 +66,7 @@ private:
 	int waitingPackets;
 	sf::TcpSocket sock;
 
+	std::stringstream outFlowStream;
 	std::stringstream inStream;
 
 };

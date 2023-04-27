@@ -50,6 +50,24 @@ void TcpClient::start()
 void TcpClient::killServer()
 {
 	keepRunning = false;
+	sock.disconnect();
+}
+
+recvData* TcpClient::getscoreArr()
+{
+	return &recvBuf;
+}
+
+sendData* TcpClient::getSendBuf()
+{
+	return &sendBuf;
+}
+
+void TcpClient::operator<<(std::string& rhs)
+{
+	mutex.lock();
+	outFlowStream << rhs;
+	mutex.unlock();
 }
 
 void TcpClient::readbufferIntoStream(char arr[], int sizearr, char packetDelim)
