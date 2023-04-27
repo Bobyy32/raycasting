@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Entity.h"
 #include "Entity_1.h"
+#include "Entity_2.h"
 
 class EntityPool
 {

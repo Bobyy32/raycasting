@@ -14,12 +14,29 @@ void EntityPool::addEntity(const int& round)
 {
 	int num_entities = round;
 
+	// Seed the random number generator with the current time
+	srand(static_cast<unsigned int>(time(0)));
+
 	for (int i = 0; i < num_entities; i++)
 	{
 		sf::Vector2f spwn = randSpawn(worldMap);
-		Entity* entity = new Entity_1(spwn);
 
-		entities.push_back(entity);
+		// Generate a random number between 1 and 2 to determine which entity to spawn
+		int entityType = rand() % 2 + 1;
+		Entity* entity = nullptr;
+		if (entityType == 1)
+		{
+			entity = new Entity_1(spwn);
+		}
+		else if (entityType == 2)
+		{
+			entity = new Entity_2(spwn);
+		}
+
+		if (entity != nullptr)
+		{
+			entities.push_back(entity);
+		}
 	}
 }
 
@@ -57,6 +74,10 @@ void EntityPool::updateEntities(const float& d_Time,const Player& player, int& r
 			if (entities[i]->getName() == "Entity_1")
 			{
 				dynamic_cast<Entity_1*>(entities[i])->update(d_Time, player);
+			}
+			else if (entities[i]->getName() == "Entity_2")
+			{
+				dynamic_cast<Entity_2*>(entities[i])->update(d_Time, player);
 			}
 		}
 	}

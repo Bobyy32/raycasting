@@ -137,6 +137,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityPool.cpp" />
     <ClCompile Include="Entity_1.cpp" />
+    <ClCompile Include="Entity_2.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityPool.h" />
     <ClInclude Include="Entity_1.h" />
+    <ClInclude Include="Entity_2.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gun.h" />
     <ClInclude Include="Header.h" />
@@ -162,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="entities\Entity_1.png" />
+    <Image Include="entities\Entity_2.png" />
     <Image Include="entities\Projectile_1.png" />
   </ItemGroup>
   <ItemGroup>

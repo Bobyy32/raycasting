@@ -51,6 +51,9 @@
     <ClCompile Include="UnitTesting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Entity_2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -89,12 +92,18 @@
     <ClInclude Include="UnitTesting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Entity_2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="entities\Entity_1.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="entities\Projectile_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="entities\Entity_2.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
