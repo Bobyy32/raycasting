@@ -36,7 +36,7 @@ sf::Vector2f EntityPool::randSpawn(int map[][MAP_WIDTH])
 	return sf::Vector2f(x * TILE_SIZE, y * TILE_SIZE);
 }
 
-void EntityPool::updateEntities(const float& d_Time,const Player& player, int& round)
+void EntityPool::updateEntities(const float& d_Time,const Player& player, int& round, int& score)
 {
 	if (entities.size() == 0)
 	{
@@ -48,6 +48,7 @@ void EntityPool::updateEntities(const float& d_Time,const Player& player, int& r
 	{
 		if (entities.at(i)->isDead() == true)
 		{
+			score += 10;
 			delete entities.at(i);
 			entities.erase(entities.begin() + i);
 		}

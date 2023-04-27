@@ -3,6 +3,12 @@
 void Game::initializeVariables()
 {
 	this->window = nullptr;
+	this->round = 0;
+	this->currentScore = 0;
+	this->topScore1 = 0;
+	this->topScore2 = 0;
+	this->topScore3 = 0;
+
 
 }
 
@@ -20,7 +26,6 @@ Game::Game()
 {
 	this->initializeVariables();
 	this->initializeWindow();
-	this->round = 0;
 }
 
 Game::~Game()
@@ -74,7 +79,7 @@ void Game::update()
 
 	player.update(deltaTime);
 
-	entityPool.updateEntities(deltaTime, player, round);
+	entityPool.updateEntities(deltaTime, player, round, currentScore);
 
 	timer += deltaTime;
 
@@ -108,7 +113,7 @@ void Game::render()
 	std::vector<std::pair<sf::Vector2f, float>> intersections = raycast.raycast(player, entityPool);
 	raycast.draw3D(*window, player, entityPool, intersections);
 	raycast.drawSprites(*window, player, entityPool, gun,intersections);
-
+	drawScore();
 
 	this->window->display();
 
@@ -138,3 +143,36 @@ void Game::drawMap()
 		}
 	}
 }
+
+void Game::drawScore()
+{
+	sf::Font font;
+	if (!font.loadFromFile("fonts/Roboto-Regular.ttf")) 
+	{
+		throw("could not load font");
+	}
+
+	std::stringstream ss;
+	ss << "Round: " << std::setw(5) << std::setfill('0') << round;
+	ss << "\nScore: " << std::setw(5) << std::setfill('0') << currentScore;
+	ss << "\n\nHigh Scores:";
+	ss << "\n1st Place: " << std::setw(5) << std::setfill('0') << topScore1;
+	ss << "\n2nd Place: " << std::setw(5) << std::setfill('0') << topScore2;
+	ss << "\n3rd Place: " << std::setw(5) << std::setfill('0') << topScore3;
+
+	sf::Text text;
+	text.setFont(font);
+	text.setString(ss.str());
+	text.setCharacterSize(24);
+	text.setFillColor(sf::Color::White);
+	text.setPosition(10.f, 10.f);
+
+	this->window->draw(text);
+}
+
+void Game::updateTopScores()
+{
+
+
+}
+
