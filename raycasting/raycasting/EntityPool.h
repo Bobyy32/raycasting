@@ -18,7 +18,7 @@ public:
 
 	sf::Vector2f randSpawn(int map[][MAP_WIDTH]);
 
-	void updateEntities(const float& d_Time, const Player& player, int& round);
+	void updateEntities(const float& d_Time, const Player& player, int& round, int& score);
 
 	int isEmpty()const { return this->entities.size() == 0; }
 

@@ -47,6 +47,12 @@ private:
 	float timer = 0.0f;
 
 
+	int currentScore;
+	int topScore1;
+	int topScore2;
+	int topScore3;
+
+
 public:
 	Game();
 	virtual ~Game();
@@ -61,6 +67,10 @@ public:
 	void render();
 
 	void drawMap();
+
+	void drawScore();
+
+	void updateTopScores();
 
 };
 

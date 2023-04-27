@@ -7,6 +7,8 @@
 #include <math.h>
 #include <ctime>
 #include <utility>
+#include <sstream>
+#include <iomanip>
 
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
